@@ -18,11 +18,13 @@ Planning algorithms are in their respective scripts:
 - robust_planning - contains robust policy evaluation and robust-MPI
 - reg_planning - contains R2-policy evaluation and R2-MPI
 
-The main script executes all planning methods and outputs both value function and policy for each approach.
+The script 'main' executes all planning methods and outputs optimal value function and policy for each approach.
+Script 'additional_exp' executes additional experiments from the Appendix. 
 
 ## Further details
 
-Parameters are set through the variable args. For ease of implementation, only one parameter alpha/beta 
+Parameters are set through the script 'config'. 
+For ease of implementation, only one parameter alpha/beta 
 determines the size of the uncertainty set (resp. the regularization level). 
 
 This means that for each state-action pair, we set the same uncertainty level. 

@@ -31,10 +31,8 @@ def modified_policy_iteration(env, k, theta, discount_factor):
         greedy_v = np.max(q, -1)
         best_action = np.argmax(q, -1)
         policy = np.eye(env.nA)[best_action]
-        # print(LA.norm(v - greedy_v, np.inf))
         if LA.norm(v - greedy_v, np.inf) <= threshold:
             return policy, greedy_v, counter
         else:
-            # print(policy)
             v, cc = policy_eval(env, policy, theta=theta, discount_factor=discount_factor, k=k,  init=greedy_v)
             counter += 1

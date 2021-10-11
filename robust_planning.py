@@ -19,10 +19,6 @@ def robust_policy_eval(env, policy, theta, discount_factor, alpha, beta, k=10000
             o.set_objective("min", (policy[s, :] | r) + discount_factor * (p * v | policy[s, :]))
             o.solve(verbose=0)
             value_fc[s] = o.obj_value()
-            # r2_val = np.dot(policy[s, :], env.Rmat[s, :]) \
-            # + discount_factor * np.dot(np.dot(env.Pmat[s, :, :].T, v), policy[s, :]) \
-            # - alpha * LA.norm(policy[s, :]) - beta * LA.norm(policy[s, :]) * discount_factor * LA.norm(v)
-            # print("Robust at s: ", value_fc[s], " -- R2 at s: ", r2_val)
         delta = LA.norm(value_fc - v, np.inf)
         v[:] = value_fc
         cc += 1
@@ -52,7 +48,6 @@ def robust_modified_policy_iteration(env, k, theta, discount_factor, alpha, beta
         greedy_v = np.max(q, -1)
         best_action = np.argmax(q, -1)
         policy = np.eye(env.nA)[best_action]
-        # print(LA.norm(v - greedy_v, np.inf))
         if LA.norm(v - greedy_v, np.inf) <= threshold:
             return policy, greedy_v, counter
         else:

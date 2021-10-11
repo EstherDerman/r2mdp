@@ -12,7 +12,6 @@ dic_b = pickle.load(file)
 file.close()
 
 v_vanilla = np.mean(np.array(dic_a['vanilla']), axis=0)
-# print(np.std(np.array(dic_a['vanilla']), axis=0))
 
 d = {}
 for key in dic_a.keys():
@@ -36,25 +35,36 @@ for key in dic_b.keys():
 print(d)
 
 
-x = [.01, .001, 1e-5, 0.]
+x = [.01, .001, 1e-5, 0.]  # radius
 
-# y_r2 = [.24, .024, 2.4e-4, 0]
-# e_r2 = [0., 0., 0., 0]
+y_r2_a = [.24, .024, 2.4e-4, 0]  # distance norm to nominal for each run
+e_r2_a = [0., 0., 0., 0]  # std of distance norm
+y_robust_a = [.24, .024, 2.4e-4, 0]
+e_robust_a = [0., 0., 0., 0]
 
-y_r2 = [7.5, .8, 8e-3, 0]
-e_r2 = [0., 0., 0., 0]
 
-y_robust = [1.8, .18, 1e-3, 0]
-e_robust = e_r2
+y_r2_b = [7.5, .8, 8e-3, 0]
+e_r2_b = [0., 0., 0., 0]
+y_robust_b = [1.8, .18, 1e-3, 0]
+e_robust_b = e_r2_b
 
-fontsize = 16
-plt.xlabel("Radius of transition uncertainty set", fontsize=fontsize)
-plt.ylabel("Distance to the optimal vanilla value function", fontsize=fontsize)
-# plt.xticks(x, ["3x3", "5x5", "10x10", "100x100"], fontsize=fontsize)
-plt.errorbar(x, y_r2, yerr=e_r2, linestyle='-', fmt = ".k", ecolor='g', capthick=1, capsize = 5, label='R2 MPI', color = 'g')
-plt.errorbar(x, y_robust, yerr=e_robust, linestyle='--', fmt = ".k", ecolor='r', capthick=2, capsize = 5, label='Robust MPI', color='r')
-plt.ylim(0, max(y_r2)+ .2)
-plt.yticks(fontsize=fontsize)
+font_size = 16
+
+plt.xlabel("Radius of reward uncertainty set", fontsize=font_size)
+plt.ylabel("Distance to the optimal vanilla value function", fontsize=font_size)
+plt.errorbar(x, y_r2_a, yerr=e_r2_a, linestyle='-', fmt = ".k", ecolor='g', capthick=1, capsize = 5, label='R2 MPI', color = 'g')
+plt.errorbar(x, y_robust_a, yerr=e_robust_a, linestyle='--', fmt = ".k", ecolor='r', capthick=2, capsize = 5, label='Robust MPI', color='r')
+plt.ylim(0, max(y_r2_a) + .2)
+plt.yticks(fontsize=font_size)
+plt.legend()
+plt.show()
+
+plt.xlabel("Radius of transition uncertainty set", fontsize=font_size)
+plt.ylabel("Distance to the optimal vanilla value function", fontsize=font_size)
+plt.errorbar(x, y_r2_b, yerr=e_r2_b, linestyle='-', fmt = ".k", ecolor='g', capthick=1, capsize = 5, label='R2 MPI', color = 'g')
+plt.errorbar(x, y_robust_b, yerr=e_robust_b, linestyle='--', fmt = ".k", ecolor='r', capthick=2, capsize = 5, label='Robust MPI', color='r')
+plt.ylim(0, max(y_r2_b)+ .2)
+plt.yticks(fontsize=font_size)
 plt.legend()
 plt.show()
 

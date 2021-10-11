@@ -33,7 +33,6 @@ def reg_modified_policy_iteration(env, k, theta, discount_factor, alpha, beta):
         greedy_v = np.max(q, -1)
         best_action = np.argmax(q, -1)
         policy = np.eye(env.nA)[best_action]  # deterministic policy update
-        # print(LA.norm(v - greedy_v, np.inf))
         if LA.norm(v - greedy_v, np.inf) <= threshold:
             return policy, greedy_v, counter
         else:
