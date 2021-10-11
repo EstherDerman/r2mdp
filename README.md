@@ -4,7 +4,9 @@ Implementation of the DP algorithms from the NeurIPS 2021 paper:
 **Twice regularized MDPs and the equivalence between
 robustness and regularization**
 
-The code is run on a 5x5 grid, where the agent has to reach a goal state to get maximal reward. 
+The code is run on a 5x5 grid, where the agent has to reach a goal state to get maximal reward.
+The file requirements.txt contains the modules necessary for running the code. 
+These may be installed using "pip install". 
 
 ## Repository structure
 The environment is in my_envs directory. 

@@ -38,30 +38,3 @@ def modified_policy_iteration(env, k, theta, discount_factor):
             # print(policy)
             v, cc = policy_eval(env, policy, theta=theta, discount_factor=discount_factor, k=k,  init=greedy_v)
             counter += 1
-
-
-# def modified_policy_iteration(env, k=1, theta=0.001, discount_factor=0.9):
-#     policy_stable = False
-#     np.random.seed(1)
-#     nums = np.random.randint(env.nA, size=env.nS)
-#     policy = np.eye(env.nA)[nums]
-#     v_true, _ = policy_eval(env, policy, theta=theta, discount_factor=discount_factor)
-#     v, cc = policy_eval(env, policy, k=k, theta=theta, discount_factor=discount_factor)
-#     # iters = cc
-#     # iters_list = [iters]
-#     while True:
-#         chosen_action = np.argmax(policy, -1)
-#         q = np.zeros([env.nS, env.nA])
-#         for a in range(env.nA):
-#             q[:, a] = env.Rmat[:, a] + discount_factor * np.dot(env.Pmat[:, :, a], v)
-#         best_action = np.argmax(q, -1)
-#         if np.all(chosen_action == best_action):
-#             policy_stable = True
-#         policy[:] = np.eye(env.nA)[best_action]
-#         v_true, _ = policy_eval(env, policy, theta=theta, discount_factor=discount_factor, init=v_true)
-#         v, cc = policy_eval(env, policy, k=k, theta=theta, discount_factor=discount_factor, init=v)
-#         # iters += cc + 1
-#         # iters_list.append(iters)
-#         if policy_stable:
-#             return policy, v_true
-
